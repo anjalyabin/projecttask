@@ -1,0 +1,155 @@
+<style>
+    body{
+  font-family: Calibri, Helvetica, sans-serif;
+
+}
+.container {
+    padding: 50px;
+  background-color: lightblue;
+}
+input[type=radio],input[type=checkbox]{
+    width: 1%;
+    padding-left: 0%;
+    border: 1px solid rgb(168, 166, 166);
+    border-radius: 4px;
+    resize: vertical;
+}
+
+input[type=text], input[type=email], input[type=number], input[type=select], input[type=date],input[type=select],input[type=password], input[type=tel]{
+  width: 100%;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  display: inline-block;
+  border: none;
+  background: #f1f1f1;
+}
+input[type=text]:focus, input[type=password], input[type=email]:focus {
+  background-color: orange;
+  outline: none;
+}
+ div {
+            padding: 10px 0;
+         }
+hr {
+  border: 1px solid #f1f1f1;
+  margin-bottom: 25px;
+}
+.registerbtn {
+  background-color: #4CAF50;
+  color: white;
+  padding: 16px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 20%;
+  opacity: 0.9;
+}
+.registerbtn:hover {
+  opacity: 1;
+}
+.col-90{
+    float: left;
+    width: 90%;
+    margin-top: 6px;
+}
+</style>
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block metadescription %}
+   Travel management
+
+{% endblock %}
+{% block title %}
+    Travel
+{% endblock %}
+{% block content %}
+
+
+
+
+
+<div>
+<img class="my_image my_image_padding" src="{% static 'images/22.png' %}" alt="our products" style="width:1490px; height:350px">
+</div>
+<br>
+<div class="space">
+<form method="post" action="" >
+
+{% csrf_token %}
+    <div class="container">
+    <center><h1>REGISTRATION FORM</h1></center>
+        <hr>
+
+        <label>User name:</label><input type="text" id="fname" name="name" placeholder="Enter your name">
+        <label>First Name:</label><input type="date" id="lname" name="date" placeholder="Enter your date of birth"><br>
+       <label>Age:</label> <input type="text" id="age" name="age" placeholder="Enter age">
+       <label>Sex:</label> <input type="radio" id="male" name="gender" value="male"/>Male
+                    <input type="radio" id="female" name="gender" value="female"/>Female<br>
+       <label>Phone number:</label>  <input type="text" id="mobile" name="mobile" placeholder="only 10 digits are allowed"><br>
+       <label>Email:</label> <input type="email" id="email" name="email" placeholder="it should contain @,."><br>
+       <label>Address:</label>  <textarea name="address" id="address" cols="30" rows="10"></textarea><br>
+      <label>District:</label> <select id="district" name="district">
+    <option value="">Select District</option>
+    <option value="thrissur">Thrissur</option>
+    <option value="ernamkulam">Ernamkulam</option>
+    <option value="palakkad">Palakkad</option>
+    <option value="kottayam">Kottayam</option>
+    <option value="trivandrum">Trivandrum</option>
+  </select><label for="district">Branch:</label>
+  <select id="branch" name="branch">
+    <option value="">Select Branch</option>
+  </select><br>
+     <label>Account Type:</label>   <select name="qualification" id="qualification">
+                        <option value=" ">Select Qualification:</option>
+                        <option value="Graduation">Graduation</option>
+                        <option value="BTech.">BTech.</option>
+                        <option value="MTech.">MTech.</option>
+                        <option value="MCA">MCA</option>
+                        <option value="BCA">BCA</option>
+                    </select><br>
+         <input type="checkbox" class="specialization" id="cs" name="specialization[]" value="Computer Science">Computer Science<br/>
+                    <input type="checkbox" class="specialization" id="it" name="specialization[]" value="Information Technology">Information Technology<br/>
+                    <input type="checkbox" class="specialization" id="ca" name="specialization[]" value="Computer Architecture">Computer Architecture<br/>
+
+       <center>  <input type="submit" class="registerbtn" value="submit">
+       </input></center>
+    </div>
+        </form></div>
+<div>
+{% for message in messages %}
+<h3 ALIGN="CENTER">{{message}}</h3>
+{% endfor %}
+</div>
+{% endblock %}
+
+<script type="text/javascript">
+  var district = document.getElementById('district');
+  var branch = document.getElementById('branch');
+
+  district.addEventListener('change', function() {
+    var selected_district = this.value;
+    branch.innerHTML = '';
+
+    if (selected_district == 'thrissur') {
+      var optionArray = ['Select Branch|', 'Branch1|branch1', 'Branch2|branch2', 'Branch3|branch3'];
+    } else if (selected_district == 'ernamkulam') {
+      var optionArray = ['Select Branch|', 'Branch4|branch4', 'Branch5|branch5', 'Branch6|branch6'];
+    } else if (selected_district == 'palakkad') {
+      var optionArray = ['Select Branch|', 'Branch7|branch7', 'Branch8|branch8', 'Branch9|branch9'];
+    } else if (selected_district == 'kottayam') {
+      var optionArray = ['Select Branch|', 'Branch10|branch10', 'Branch11|branch11', 'Branch12|branch12'];
+    } else if (selected_district == 'trivandrum') {
+      var optionArray = ['Select Branch|', 'Branch13|branch13', 'Branch14|branch14', 'Branch15|branch15'];
+    }
+
+    for (var option in optionArray) {
+      var pair = optionArray[option].split('|');
+      var newOption = document.createElement('option');
+      newOption.value = pair[1];
+      newOption.innerHTML = pair[0];
+      branch.options.add(newOption);
+    }
+  });
+</script>

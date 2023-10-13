@@ -1,0 +1,24 @@
+<script type="text/javascript">
+        var branch = document.getElementById('branch');
+        var district = document.getElementById('district');
+
+        var branch_district = {
+            'branch1': ['district1', 'district2'],
+            'branch2': ['district2', 'district3'],
+            'branch3': ['district3', 'district1']
+        }
+
+        branch.addEventListener('change', function() {
+            var selected_branch = branch.value;
+            district.innerHTML = '';
+
+            branch_district[selected_branch].forEach(function(district_name) {
+                var option = document.createElement('option');
+                option.value = district_name;
+                option.innerHTML = district_name;
+                district.appendChild(option);
+            });
+        });
+    </script>
+</body>
+</html>
